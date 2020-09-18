@@ -194,6 +194,17 @@ iframe {
   padding-bottom: 44px;
 }
 
+.contact1-form-span {
+  display: block;
+  font-family: Montserrat-ExtraBold;
+  font-size: 24px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: right;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
 input.input1 {
   height: 50px;
   border-radius: 25px;

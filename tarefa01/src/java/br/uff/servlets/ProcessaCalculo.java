@@ -2,16 +2,26 @@ package br.uff.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ProcessaCalculo extends HttpServlet {
-       
+    int visitas = 0;
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
+        if(request.getCookies().length == 0){
+            Cookie c = new Cookie("visitantes", String.valueOf(Math.random()));
+            c.setMaxAge(60*60*24*7);
+            response.addCookie(c);
+        } else {
+            visitas++;
+        }
             
         Double valor1 = 0.0;
         Double valor2 = 0.0;
@@ -49,6 +59,7 @@ public class ProcessaCalculo extends HttpServlet {
         }
         
         session.setAttribute("resultado", resultado);
+        session.setAttribute("visitas", visitas);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

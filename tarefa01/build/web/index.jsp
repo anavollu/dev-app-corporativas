@@ -82,6 +82,13 @@
 						</span>
 					</button>
 				</div>
+                                    <span class="contact1-form-span" >
+                                        <% if ((Integer) session.getAttribute("visitas") != null) {
+                                            out.println("Visitas: " + (Integer) session.getAttribute("visitas"));
+                                        } else {
+                                            out.println("Visitas: 0");
+                                    }%>
+                                    </span>
 			</form>
 		</div>
 	</div>
