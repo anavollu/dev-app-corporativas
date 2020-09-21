@@ -38,16 +38,13 @@ public class ProcessaCalculo extends HttpServlet {
                 case "MUL":
                     resultado = (valor1 * valor2);
                     break;
-                default:
-                    resultado = null;
-                    break;
             }
             
             httpSession.removeAttribute("erro");
             httpSession.setAttribute("resultado", Math.round(resultado * 100.0) / 100.0);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         
-        } catch (IOException | NumberFormatException | ServletException e) {
+        } catch (NullPointerException | IOException | NumberFormatException | ServletException e) {
             httpSession.setAttribute("erro", "Informe valores válidos");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }   
