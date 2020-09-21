@@ -22,11 +22,17 @@
     </head>
     <body>
 	<div class="contact1">
-		<div class="container-contact1">
-			<div class="contact1-pic js-tilt" data-tilt>
+                <div class="container-contact1">
+                        <div class="contact1-pic js-tilt" data-tilt>
 				<img src="images/img-01.png" alt="IMG">
+                                <span class="contact1-form-span" >
+                                    <jsp:include page="/ControlaSessao" />
+                                        <%  if ((Integer) session.getAttribute("visitas") != null) {
+                                                out.println("Visitas: " + (Integer) session.getAttribute("visitas"));
+                                        }%>
+                                </span>
 			</div>
-                    
+                        
 			<form class="contact1-form validate-form" method="POST" action="http://localhost:8080/Calculator/ProcessaCalculo">
 				<span class="contact1-form-title">
 					Faça seu cálculo!
@@ -82,13 +88,6 @@
 						</span>
 					</button>
 				</div>
-                                    <span class="contact1-form-span" >
-                                        <% if ((Integer) session.getAttribute("visitas") != null) {
-                                            out.println("Visitas: " + (Integer) session.getAttribute("visitas"));
-                                        } else {
-                                            out.println("Visitas: 0");
-                                    }%>
-                                    </span>
 			</form>
 		</div>
 	</div>
@@ -98,25 +97,12 @@
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="vendor/select2/select2.min.js"></script>
 	<script src="vendor/tilt/tilt.jquery.min.js"></script>
-	<script >
+	<script>
 		$('.js-tilt').tilt({
 			scale: 1.1
-		});
+		});   
 	</script>
-
-<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 </body>
 </html>
-        <% if ("V".equals((String) request.getParameter("erro"))){
-            out.append("<p> Informe um valor válido! </p>");
-        } else if ("O".equals((String) request.getParameter("erro"))){
-            out.append("<p> Selecione um operador válido! </p>");
-        }
- 
-        if ((Double) session.getAttribute("resultado") != null) {
-                out.println("<p> Resultado: " + (Double) session.getAttribute("resultado") + "</p>");
-           } else {
-               out.println("<p> Faça seu cálculo! </p>");
-        }%>
