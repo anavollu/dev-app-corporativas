@@ -20,7 +20,7 @@ public class ControlaSessao extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Sessao sessao = new Sessao();
         
-        ArrayList<Cookie> cookies = new ArrayList();
+        ArrayList<Cookie> cookies = new ArrayList<>();
         
         for(Cookie c : request.getCookies()){
             if(c.getName().contains("visitante")){

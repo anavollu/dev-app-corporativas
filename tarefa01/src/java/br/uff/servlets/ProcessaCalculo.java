@@ -23,27 +23,33 @@ public class ProcessaCalculo extends HttpServlet {
             valor2 = Double.parseDouble(request.getParameter("valor2"));
             String operacao = request.getParameter("operacao");
             
-            if("SOM".equals(operacao)){
-                resultado = (valor1 + valor2);
-            } else if ("SUB".equals(operacao)) {
-                resultado = (valor1 - valor2);
-            } else if ("DIV".equals(operacao)) {
-                resultado = (valor1 / valor2);
-            } else if ("MUL".equals(operacao)) {
-                resultado = (valor1 * valor2);
-            } else {
+            if(null == operacao){
                 resultado = null;
+            } else switch (operacao) {
+                case "SOM":
+                    resultado = (valor1 + valor2);
+                    break;
+                case "SUB":
+                    resultado = (valor1 - valor2);
+                    break;
+                case "DIV":
+                    resultado = (valor1 / valor2);
+                    break;
+                case "MUL":
+                    resultado = (valor1 * valor2);
+                    break;
+                default:
+                    resultado = null;
+                    break;
             }
             
             httpSession.removeAttribute("erro");
             httpSession.setAttribute("resultado", Math.round(resultado * 100.0) / 100.0);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | ServletException e) {
             httpSession.setAttribute("erro", "Informe valores válidos");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }
-        
-        
+        }   
     }
 }
