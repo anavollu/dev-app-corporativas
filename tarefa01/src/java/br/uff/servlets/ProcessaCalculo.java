@@ -17,12 +17,11 @@ public class ProcessaCalculo extends HttpServlet {
         Double valor1 = 0.0;
         Double valor2 = 0.0;
         Double resultado = 0.0;
-        String operacao = "";
         
         try {
             valor1 = Double.parseDouble(request.getParameter("valor1"));
             valor2 = Double.parseDouble(request.getParameter("valor2"));
-            operacao = request.getParameter("operacao");
+            String operacao = request.getParameter("operacao");
             
             if("SOM".equals(operacao)){
                 resultado = (valor1 + valor2);
@@ -32,12 +31,17 @@ public class ProcessaCalculo extends HttpServlet {
                 resultado = (valor1 / valor2);
             } else if ("MUL".equals(operacao)) {
                 resultado = (valor1 * valor2);
+            } else {
+                resultado = null;
             }
-        
+            
+            httpSession.removeAttribute("erro");
             httpSession.setAttribute("resultado", Math.round(resultado * 100.0) / 100.0);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
+        
         } catch (Exception e) {
-            request.getRequestDispatcher("/index.jsp?erro=S").forward(request, response);
+            httpSession.setAttribute("erro", "Informe valores válidos");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
         
         

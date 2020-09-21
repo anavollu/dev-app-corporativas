@@ -26,18 +26,16 @@
                         <div class="contact1-pic js-tilt" data-tilt>
 				<img src="images/img-01.png" alt="IMG">
                                 <span class="contact1-form-span" >
-                                    <jsp:include page="/ControlaSessao" />
+                                    <jsp:include page="/ControlaSessao"/>
                                         <%  if ((Integer) session.getAttribute("visitas") != null) {
                                                 out.println("Visitas: " + (Integer) session.getAttribute("visitas"));
                                         }%>
                                 </span>
 			</div>
-                        
 			<form class="contact1-form validate-form" method="POST" action="http://localhost:8080/Calculator/ProcessaCalculo">
-				<span class="contact1-form-title">
+                                <span class="contact1-form-title">
 					Faça seu cálculo!
 				</span>
-                                
 				<div class="wrap-input1 validate-input" data-validate = "O primeiro valor é necessário!">
 					<input class="input1" type="text" name="valor1" placeholder="0">
 					<span class="shadow-input1"></span>
@@ -89,6 +87,13 @@
 					</button>
 				</div>
 			</form>
+                        <div>
+                            <%  if ((String) session.getAttribute("erro") != null) {
+                                    out.println("<span class=\"alert alert-danger\">");
+                                    out.println("<strong>ERRO:</strong> " + (String) session.getAttribute("erro"));
+                                    out.println("</span>");
+                            }%>
+                        </div>
 		</div>
 	</div>
 
