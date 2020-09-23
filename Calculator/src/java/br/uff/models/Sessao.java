@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Sessao {
-    // Alterar o path conforme caminho no computador do usuário
+    // Alterar o path conforme caminho no computador do usuário ou C:\\
     public int ID = 0;
     private final String path = "C:\\Users\\FelipeVilaChaDosSant\\Documents\\GitHub\\dev-app-corporativas\\Calculator\\web\\controle\\";
     private final String nome_arquivo = "counts.txt";
