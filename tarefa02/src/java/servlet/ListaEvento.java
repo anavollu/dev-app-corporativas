@@ -42,7 +42,6 @@ public class ListaEvento extends HttpServlet {
             session.setAttribute("edicoes", edicoes);
             
         } catch (Exception ex) {
-            session.setAttribute("erro","busca");
             request.getRequestDispatcher("/index.jsp?erro").forward(request, response);
         }
         

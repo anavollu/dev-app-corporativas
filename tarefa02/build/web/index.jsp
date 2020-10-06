@@ -2,7 +2,7 @@
 <%@page import="model.Edicao"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE HTML>
-<html lang="pt-br">
+<html lang="pt">
 	<head>
 		<meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">

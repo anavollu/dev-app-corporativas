@@ -58,11 +58,9 @@ public class CriaEdicao extends HttpServlet {
         boolean inseriu = new EdicaoDAO().insereEdicao(edicaoNova);
         
         if(!inseriu){
-            session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             session.setAttribute("evento", evento);
-            session.setAttribute("status", "inserido");
             response.setIntHeader("Refresh", 1);
             response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento.getIdEvento());
         }

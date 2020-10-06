@@ -34,6 +34,8 @@ public class EditaEdicao extends HttpServlet {
         Integer ano = Integer.parseInt(request.getParameter("ano"));
         String inputDataInicio = request.getParameter("data_inicio");
         String inputDataFim = request.getParameter("data_fim");
+        String cidade = request.getParameter("cidade");
+        String pais = request.getParameter("pais");
         
         
         Date dataInicio = new Date();
@@ -46,19 +48,14 @@ public class EditaEdicao extends HttpServlet {
             Logger.getLogger(EditaEdicao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String cidade = request.getParameter("cidade");
-        String pais = request.getParameter("pais");
-        
         Edicao edicaoNova = new Edicao(id, numero, ano, dataInicio, dataFim, cidade, pais, evento);
         
         boolean atualizou = new EdicaoDAO().updateEdicao(edicaoNova);
         
         if(!atualizou){
-            session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             session.setAttribute("eventos", new EventoDAO().getEventos());
-            session.setAttribute("status", "refresh");
             response.setIntHeader("Refresh", 1);
             response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento.getIdEvento());
         }

@@ -39,7 +39,6 @@ public class CriaEvento extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             session.setAttribute("eventos", new EventoDAO().getEventos());
-            session.setAttribute("status", "inserido");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }

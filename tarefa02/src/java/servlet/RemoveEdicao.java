@@ -25,10 +25,8 @@ public class RemoveEdicao extends HttpServlet {
         boolean removeu = new EdicaoDAO().removeEdicao(id);
         
         if(!removeu){
-            session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            session.setAttribute("status", "removido");
             session.setAttribute("evento", evento);
             response.setIntHeader("Refresh", 1);
             response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento.getIdEvento());

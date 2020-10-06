@@ -47,6 +47,7 @@
                         
 		</script>
 		<noscript>
+                        <link rel="icon" type="image/png" href="images/party.ico"/>
 			<link rel="stylesheet" href="assets/css/skel.css" />
 			<link rel="stylesheet" href="assets/css/style.css" />
 			<link rel="stylesheet" href="assets/css/style-xlarge.css" />
@@ -58,6 +59,7 @@
 			<link rel="stylesheet" href="assets/css/bootstrap-reboot.min.css" />
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+                        <link rel="shortcut icon" href="img/fav.png" />
 		</noscript>
 	</head>
         <body id="top">
@@ -87,7 +89,7 @@
 						<h3> <strong>Sigla:</strong> <%= ((Evento) session.getAttribute("evento")).getSigla() %> </h3>
                                                 <h3> <strong>Local:</strong> <%= ((Evento) session.getAttribute("evento")).getArea() %> </h3>
                                                 <h3> <strong>Oferecimento:</strong> <%= ((Evento) session.getAttribute("evento")).getOrganizacao()%></h3>
-						<ul class="actions">
+						<ul class="actions flex">
 							<li><a class="button alt" data-toggle="modal" data-target="#edita-evento">Editar</a></li>
                                                         <li><a class="button alt" data-toggle="modal" data-target="#exclui-evento">Remover</a></li>
 						</ul>
@@ -104,7 +106,7 @@
 					<div class="row">
 						<table id="historico" class="table">
 							<thead>
-							  <th>Numero</th>
+							  <th>Número</th>
 							  <th>Ano</th>
 							  <th>Data de inicio</th>
 							  <th>Data de término</th>
@@ -121,7 +123,7 @@
                                                                             out.println("<td> " + edicao.getData_fim() + " </td>");
                                                                             out.println("<td> " + edicao.getCidade() + " </td>");
                                                                             out.println("<td> " + edicao.getPais() + " </td>");
-                                                                            out.println("<td> <button class=\"button alt\" data-title=\"Editar\" data-toggle=\"modal\" data-target=\"#cria-edicao\" data-id=\"" + edicao.getId() + "\">Editar</button></td>");
+                                                                            out.println("<td> <button class=\"button alt\" data-title=\"Editar\" data-toggle=\"modal\" data-target=\"#edita-edicao\" data-id=\"" + edicao.getId() + "\">Editar</button></td>");
                                                                             out.println("<td> <button class=\"button danger\" data-title=\"Excluir\" data-toggle=\"modal\" data-target=\"#exclui-edicao\" data-id=\"" + edicao.getId() + "\">Excluir</button></td></tr>");
                                                                       }
                                                                 }%>
@@ -272,27 +274,31 @@
 						
                                             <form role="form" action="http://localhost:8080/marcai/editaEdicao" method="POST" class="registration-form">
 						<div class="modal-body">
-								<input type="hidden" name="id" value="">
+								<input type="text" name="id" id="id" value="">
 								<input type="hidden" name="evento_id" value="<%= ((Evento) session.getAttribute("evento")).getIdEvento() %>">
 								<div class="form-group">
-									<input type="text" name="numero" value="" class="form-control" id="numero" required/>
+									<label class="sr-only">Número</label>
+									<input type="text" name="numero" placeholder="" class="form-control" id="numero" required/>
 								</div>
 								<div class="form-group">
-									<input type="text" name="ano" value="Ano de realização..." class="form-control" id="ano" required/>
+									<label class="sr-only">Ano</label>
+									<input type="text" name="ano" placeholder="Ano de realização..." class="form-control" id="ano" required/>
 								</div>
 								<div class="form-group">
-									<input type="date" name="data_inicio" value="" class="form-control" id="data_inicio" required/>
+									<label class="sr-only">Data de início</label>
+									<input type="date" name="data_inicio" placeholder="" class="form-control" id="data_inicio" required/>
 								</div>
 								<div class="form-group">
-									<input type="date" name="data_fim" value="" class="form-control" id="data_fim" required/>
+									<label class="sr-only">Data de término</label>
+									<input type="date" name="data_fim" placeholder="" class="form-control" id="data_fim" required/>
 								</div>
 								<div class="form-group">
-			
-									<input type="text" name="area" value="Cidade sede..." class="form-control" id="area" required/>
+									<label class="sr-only">Cidade</label>
+									<input type="text" name="cidade" placeholder="Cidade sede..." class="form-control" id="cidade" required/>
 								</div>
 								<div class="form-group">
-				
-									<input type="text" name="pais" value="País sede..." class="form-control" id="pais" required/>
+									<label class="sr-only">Pais</label>
+									<input type="text" name="pais" placeholder="País sede..." class="form-control" id="pais" required/>
 								</div>
 							</div>
 							<div class="modal-footer">

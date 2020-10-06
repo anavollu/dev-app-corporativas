@@ -64,17 +64,10 @@ public class EdicaoDAO {
     
     public boolean updateEdicao(Edicao edicao){
         boolean atualizou = true;
+        
         try {
-            managerInstance.getTransaction().begin();
-            Edicao edicaoAntiga = new Edicao();
-            Edicao edicaoNova = managerInstance.merge(edicaoAntiga);
-            edicaoNova.setNumero(edicao.getNumero());
-            edicaoNova.setAno(edicao.getAno());
-            edicaoNova.setEvento(edicao.getEvento());
-            edicaoNova.setData_inicio(edicao.getData_inicio());
-            edicaoNova.setData_fim(edicao.getData_fim());
-            edicaoNova.setCidade(edicao.getCidade());
-            edicaoNova.setPais(edicao.getPais());
+            managerInstance.getTransaction().begin();        
+            managerInstance.merge(edicao);
             managerInstance.getTransaction().commit();
             manager.fechaConexao(managerInstance);
         } catch (Exception ex) {

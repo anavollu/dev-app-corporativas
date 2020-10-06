@@ -24,10 +24,8 @@ public class RemoveEvento extends HttpServlet {
         boolean removeu = new EventoDAO().removeEvento(id);
         
         if(!removeu){
-            session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            session.setAttribute("status", "removido");
             response.sendRedirect("http://localhost:8080/marcai/index.jsp");
         }
     }
