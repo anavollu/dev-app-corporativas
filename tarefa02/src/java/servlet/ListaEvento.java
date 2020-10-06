@@ -23,10 +23,28 @@ public class ListaEvento extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        Integer id = Integer.parseInt(request.getQueryString().replace("id=", ""));
-        Evento evento = new EventoDAO().getEventoById(id);
-        List<Edicao> edicoes = new EdicaoDAO().getEdicoesDeEvento(evento);
-        session.setAttribute("evento", evento);
-        session.setAttribute("edicoes", edicoes);
+        
+        try {
+            
+            Evento evento = new Evento();
+            
+            if(request.getQueryString().contains("nome=")){
+                String nome = request.getQueryString().replace("nome=", "");
+                evento = new EventoDAO().getEventoByNome(nome);
+            } else {
+                Integer id = Integer.parseInt(request.getQueryString().replace("id=", ""));
+                evento = new EventoDAO().getEventoById(id);
+            }
+            
+            List<Edicao> edicoes = new EdicaoDAO().getEdicoesDeEvento(evento);
+
+            session.setAttribute("evento", evento);
+            session.setAttribute("edicoes", edicoes);
+            
+        } catch (Exception ex) {
+            session.setAttribute("erro","busca");
+            request.getRequestDispatcher("/index.jsp?erro").forward(request, response);
+        }
+        
     }
 }

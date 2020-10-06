@@ -56,6 +56,18 @@ public class Edicao implements Serializable {
     @JoinColumn(name="evento", nullable=false)
     private Evento evento;
     
+    public Edicao (){}
+    
+    public Edicao (Integer id, Integer numero, Integer ano, Date data_inicio, Date data_fim, String cidade, String pais, Evento evento){
+        this.id_edicao = id;
+        this.numero = numero;
+        this.ano = ano;
+        this.data_inicio = data_inicio;
+        this.data_fim = data_fim;
+        this.cidade = cidade;
+        this.pais = pais;
+        this.evento = evento;
+    }
     
     public Integer getId() {
         return id_edicao;

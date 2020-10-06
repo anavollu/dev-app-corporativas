@@ -14,6 +14,7 @@
 		<script src="assets/js/init.js"></script>
 		<script src="assets/js/bootstrap.bundle.js"></script>
 		<script src="assets/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 		<script src="assets/js/bootstrap.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
 		<script>
@@ -43,6 +44,7 @@
 				modal.find('#id').val(id);
 				});
 			});
+                        
 		</script>
 		<noscript>
 			<link rel="stylesheet" href="assets/css/skel.css" />
@@ -54,10 +56,12 @@
 			<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
 			<link rel="stylesheet" href="assets/css/bootstrap-reboot.css" />
 			<link rel="stylesheet" href="assets/css/bootstrap-reboot.min.css" />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		</noscript>
 	</head>
-	<body id="top">
-
+        <body id="top">
+                
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
 				<h1><a href="#">MarcAí</a></h1>
@@ -70,6 +74,7 @@
 
 		<!-- Main -->
                 <jsp:include page="/listaEvento"/>
+                
 			<section id="main" class="wrapper style1">
 				<header class="major">
 					<h2>Evento</h2>
@@ -82,14 +87,14 @@
 						<h3> <strong>Sigla:</strong> <%= ((Evento) session.getAttribute("evento")).getSigla() %> </h3>
                                                 <h3> <strong>Local:</strong> <%= ((Evento) session.getAttribute("evento")).getArea() %> </h3>
                                                 <h3> <strong>Oferecimento:</strong> <%= ((Evento) session.getAttribute("evento")).getOrganizacao()%></h3>
-						<ul class="actions flex">
+						<ul class="actions">
 							<li><a class="button alt" data-toggle="modal" data-target="#edita-evento">Editar</a></li>
                                                         <li><a class="button alt" data-toggle="modal" data-target="#exclui-evento">Remover</a></li>
 						</ul>
 					</section>
 				</div>	
 			</section>
-			<section id="main" class="wrapper style1">
+			<section id="history" class="wrapper style1">
 				<header class="major">
 					<h2>Histórico de edições</h2>
                                         <button class="button alt" data-title="Criar" data-toggle="modal" data-target="#cria-edicao">Criar</button>
@@ -229,28 +234,28 @@
                                             <form role="form" action="http://localhost:8080/marcai/editaEvento" method="POST" class="registration-form">
 						<div class="modal-body">
 								<div class="form-group">
-									<input type="hidden" name="id" id="id" value=""/>
+                                                                    <input type="hidden" name="id" id="id" value="<%= ((Evento) session.getAttribute("evento")).getIdEvento()%>"/>
 								</div>
 								<div class="form-group">
 									<label class="sr-only">Nome</label>
-									<input type="text" name="nome" value="Nome do rolê..." class="form-control" id="form-first-name">
+                                                                        <input type="text" name="nome" value="<%= ((Evento) session.getAttribute("evento")).getNome() %>" class="form-control" id="form-first-name">
 								</div>
 								<div class="form-group">
 									<label class="sr-only">Sigla</label>
-									<input type="text" name="sigla" value="Sigla..." class="form-control" id="sigla">
+                                                                        <input type="text" name="sigla" value="<%= ((Evento) session.getAttribute("evento")).getSigla()%>" class="form-control" id="sigla">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" >Local</label>
-									<input type="text" name="area" value="Local..." class="form-control" id="area">
+									<input type="text" name="area" value="<%= ((Evento) session.getAttribute("evento")).getArea() %>" class="form-control" id="area">
 								</div>
 								<div class="form-group">
 									<label class="sr-only">Organização</label>
-									<input type="text" name="organizacao" value="Organização responsável..." class="form-control" id="organizacao">
+                                                                        <input type="text" name="organizacao" value="<%= ((Evento) session.getAttribute("evento")).getOrganizacao() %>" class="form-control" id="organizacao">
 								</div>
 							</div>
 							<div class="modal-footer">
 								<ul class="actions">
-                                                                    <li><a class="button special">Marcar!</a></li>
+                                                                    <li><button type="submit" class="button special">Excluir</button></li>
 								</ul>
 							</div>
 						</form>
@@ -270,32 +275,28 @@
 								<input type="hidden" name="id" value="">
 								<input type="hidden" name="evento_id" value="<%= ((Evento) session.getAttribute("evento")).getIdEvento() %>">
 								<div class="form-group">
-									<label class="sr-only">Número</label>
 									<input type="text" name="numero" value="" class="form-control" id="numero" required/>
 								</div>
 								<div class="form-group">
-									<label class="sr-only">Ano</label>
 									<input type="text" name="ano" value="Ano de realização..." class="form-control" id="ano" required/>
 								</div>
 								<div class="form-group">
-									<label class="sr-only">Data de início</label>
 									<input type="date" name="data_inicio" value="" class="form-control" id="data_inicio" required/>
 								</div>
 								<div class="form-group">
-									<label class="sr-only">Data de término</label>
 									<input type="date" name="data_fim" value="" class="form-control" id="data_fim" required/>
 								</div>
 								<div class="form-group">
-									<label class="sr-only">Cidade</label>
+			
 									<input type="text" name="area" value="Cidade sede..." class="form-control" id="area" required/>
 								</div>
 								<div class="form-group">
-									<label class="sr-only">Pais</label>
+				
 									<input type="text" name="pais" value="País sede..." class="form-control" id="pais" required/>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" class="button special">Marcar!</button>
+								<button type="submit" class="button special">Atualizar</button>
 							</div>
 						</form>
 					</div>

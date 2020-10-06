@@ -20,7 +20,7 @@ import model.Evento;
  *
  * @author Felipe Vila Chã
  */
-public class CriaEdicao extends HttpServlet {
+public class EditaEdicao extends HttpServlet {
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,13 +28,13 @@ public class CriaEdicao extends HttpServlet {
         
         HttpSession session = request.getSession();
         
+        Integer id = Integer.parseInt(request.getParameter("id"));
         Evento evento = (Evento) session.getAttribute("evento");
-        int numero = Integer.parseInt(request.getParameter("numero"));
-        int ano = Integer.parseInt(request.getParameter("ano"));
-        String cidade = request.getParameter("cidade");
-        String pais = request.getParameter("pais");
+        Integer numero = Integer.parseInt(request.getParameter("numero"));
+        Integer ano = Integer.parseInt(request.getParameter("ano"));
         String inputDataInicio = request.getParameter("data_inicio");
         String inputDataFim = request.getParameter("data_fim");
+        
         
         Date dataInicio = new Date();
         Date dataFim = new Date();
@@ -43,26 +43,22 @@ public class CriaEdicao extends HttpServlet {
             dataInicio = new SimpleDateFormat("yyyy-MM-dd").parse(inputDataInicio);
             dataFim = new SimpleDateFormat("yyyy-MM-dd").parse(inputDataFim);
         } catch (ParseException ex) {
-            Logger.getLogger(CriaEdicao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditaEdicao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Edicao edicaoNova = new Edicao();
-        edicaoNova.setEvento(evento);
-        edicaoNova.setNumero(numero);
-        edicaoNova.setAno(ano);
-        edicaoNova.setData_inicio(dataInicio);
-        edicaoNova.setData_fim(dataFim);
-        edicaoNova.setCidade(cidade);
-        edicaoNova.setPais(pais);
-
-        boolean inseriu = new EdicaoDAO().insereEdicao(edicaoNova);
+        String cidade = request.getParameter("cidade");
+        String pais = request.getParameter("pais");
         
-        if(!inseriu){
+        Edicao edicaoNova = new Edicao(id, numero, ano, dataInicio, dataFim, cidade, pais, evento);
+        
+        boolean atualizou = new EdicaoDAO().updateEdicao(edicaoNova);
+        
+        if(!atualizou){
             session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            session.setAttribute("evento", evento);
-            session.setAttribute("status", "inserido");
+            session.setAttribute("eventos", new EventoDAO().getEventos());
+            session.setAttribute("status", "refresh");
             response.setIntHeader("Refresh", 1);
             response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento.getIdEvento());
         }

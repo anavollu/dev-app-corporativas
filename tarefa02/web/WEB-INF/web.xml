@@ -28,6 +28,10 @@
         <servlet-name>RemoveEdicao</servlet-name>
         <servlet-class>servlet.RemoveEdicao</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditaEdicao</servlet-name>
+        <servlet-class>servlet.EditaEdicao</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuscaEvento</servlet-name>
         <url-pattern>/buscaEvento</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>RemoveEdicao</servlet-name>
         <url-pattern>/removeEdicao</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditaEdicao</servlet-name>
+        <url-pattern>/editaEdicao</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

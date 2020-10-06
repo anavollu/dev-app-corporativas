@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Evento;
 
 /**
  *
@@ -28,9 +27,8 @@ public class RemoveEvento extends HttpServlet {
             session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            session.setAttribute("eventos", new EventoDAO().getEventos());
             session.setAttribute("status", "removido");
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            response.sendRedirect("http://localhost:8080/marcai/index.jsp");
         }
     }
 }

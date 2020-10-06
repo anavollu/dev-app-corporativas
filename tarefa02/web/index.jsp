@@ -5,6 +5,7 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>MarcAí</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
@@ -39,7 +40,6 @@
 			<link rel="stylesheet" href="assets/css/bootstrap-reboot.css" />
 			<link rel="stylesheet" href="assets/css/bootstrap-reboot.min.css" />
 			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		</noscript>
 	</head>
@@ -61,8 +61,8 @@
 					<h2>MarcAí</h2>
 					<p>Crie e gerencie seus eventos de forma prática e rápida</p>
 					<ul class="actions">
-						<li><a data-toggle="modal" data-target="#cria-evento" class="button big special">Marque aqui</a></li>
-						<li><a href="#eventos" class="button big alt">Veja o que está rolando</a></li>
+                                            <li><a data-toggle="modal" data-target="#cria-evento" class="button big special">Marque aqui</a></li>
+                                            <li><a href="#eventos"  class="button big alt">Veja o que está rolando</a></li>
 					</ul>
 				</div>
 			</section>
@@ -75,18 +75,22 @@
 					<p>Explore e descubra!</p>
                                 </header>
 				<div class="container" id="eventos">
-					<div class="row">
+                                    <ul class="actions fit">
+                                        <li><input type="text" class="" id="procura_nome" placeholder="Procurar..." name="procura_nome"></li>
+                                        <li><button class="button alt" onclick="window.location.href='http://localhost:8080/marcai/listaEvento.jsp?nome='+document.getElementById('procura_nome').value"><i class="fa fa-search"></i></button></li>
+                                    </ul>
+                                    <div class="row">
                                             <% for (Evento evento : ((List<Evento>) session.getAttribute("eventos"))){
 						int evento_id = evento.getIdEvento();
                                                 out.println("<div class=\"4u\">");
 						out.println("<section class=\"special box\">");
-                                                out.println("<i class=\"icon fa-area-chart major\"></i>");
+                                                out.println("<i class=\"icon fa-calendar major\"></i>");
 						out.println("<h3>" + evento.getNome() +"</h3>");
 						out.println("<p> Sigla: " + evento.getSigla() + "</p>");
                                                 out.println("<p> Local: " + evento.getArea() + "</p>"); 
                                                 out.println("<p> Oferecimento: " + evento.getOrganizacao() + "</p>"); 
 						out.println("<ul class=\"actions\">");
-                                                out.println("<li><a href=\"http://localhost:8080/marcai/listaEvento.jsp?id=" + evento_id + "\" class=\"button alt\">Learn More</a></li>");
+                                                out.println("<li><a href=\"http://localhost:8080/marcai/listaEvento.jsp?id=" + evento_id + "\" class=\"button alt\">Informações</a></li>");
 						out.println("</ul>");
                                                 out.println("</section>");
 						out.println("</div>");
@@ -126,7 +130,7 @@
                                                 </form>
 					</div>
 				</div>
-			</div>
+			</div>               
 		<!-- Footer -->
 			<footer id="footer">
 				<div class="container">

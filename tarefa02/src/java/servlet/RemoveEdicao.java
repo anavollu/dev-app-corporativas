@@ -1,7 +1,6 @@
 package servlet;
 
 import dao.EdicaoDAO;
-import dao.EventoDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,16 +22,16 @@ public class RemoveEdicao extends HttpServlet {
         HttpSession session = request.getSession();
         Evento evento = ((Evento) session.getAttribute("evento"));
         Integer id = Integer.parseInt(request.getParameter("id"));
-
         boolean removeu = new EdicaoDAO().removeEdicao(id);
         
         if(!removeu){
             session.setAttribute("status", "erro");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            session.setAttribute("eventos", new EventoDAO().getEventos());
             session.setAttribute("status", "removido");
-            response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento);
+            session.setAttribute("evento", evento);
+            response.setIntHeader("Refresh", 1);
+            response.sendRedirect("http://localhost:8080/marcai/listaEvento.jsp?id=" + evento.getIdEvento());
         }
     }
 }
