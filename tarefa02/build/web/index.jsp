@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MarcAí</title>
+		<title>MarcAi</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -47,7 +47,7 @@
 
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
-				<h1><a href="#">MarcAí</a></h1>
+				<h1><a href="#">MarcAi</a></h1>
 				<nav id="nav">
 					<ul>
                                             <li><a href="index.jsp">Home</a></li>
@@ -59,10 +59,10 @@
 			<section id="banner">
 				<div class="inner">
 					<h2>MarcAí</h2>
-					<p>Crie e gerencie seus eventos de forma prática e rápida</p>
+					<p>Crie e gerencie seus eventos de forma pratica e rapida</p>
 					<ul class="actions">
                                             <li><a data-toggle="modal" data-target="#cria-evento" class="button big special">Marque aqui</a></li>
-                                            <li><a href="#eventos"  class="button big alt">Veja o que está rolando</a></li>
+                                            <li><a href="#eventos"  class="button big alt">Veja o que esta rolando</a></li>
 					</ul>
 				</div>
 			</section>
@@ -71,7 +71,7 @@
                 <jsp:include page="/buscaEvento"/>
 			<section id="one" class="wrapper style1">
 				<header class="major">
-					<h2>Alguns rolês marcados</h2>
+					<h2>Alguns roles marcados</h2>
 					<p>Explore e descubra!</p>
                                 </header>
 				<div class="container" id="eventos">
@@ -103,13 +103,13 @@
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">	
-							<h2 class="modal-title">MarcAí <span class="close" data-dismiss="modal">&times;</span> </h2>
+							<h2 class="modal-title">MarcAi <span class="close" data-dismiss="modal">&times;</span> </h2>
 						</div>
 						<form method="POST" action="http://localhost:8080/marcai/criaEvento" class="registration-form">
                                                     <div class="modal-body">
                                                             <div class="form-group">
                                                                  <label class="sr-only">Nome</label>
-                                                                 <input type="text" name="nome" placeholder="Nome do rolê..." class="form-control" id="nome" required/>
+                                                                 <input type="text" name="nome" placeholder="Nome do role..." class="form-control" id="nome" required/>
                                                             </div>
                                                                     <div class="form-group">
                                                                             <label class="sr-only">Sigla</label>
@@ -121,7 +121,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                             <label class="sr-only">Organização</label>
-                                                                            <input type="text" name="organizacao" placeholder="Organização responsável..." class="form-control" id="organizacao" required/>
+                                                                            <input type="text" name="organizacao" placeholder="Organizacao responsável..." class="form-control" id="organizacao" required/>
                                                                     </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -136,8 +136,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="6u">
-							<h2>Quem somos nós</h2>
-							<p>Uma empresa especializada em marcar a vida dos clientes. Vivencie experiências únicas!</p>
+							<h2>Quem somos nos</h2>
+							<p>Uma empresa especializada em marcar a vida dos clientes. Vivencie experiencias unicas!</p>
 							<ul class="icons">
 								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
