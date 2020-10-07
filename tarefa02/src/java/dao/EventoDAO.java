@@ -12,11 +12,11 @@ public class EventoDAO {
     public ManagerDAO manager = new ManagerDAO();
     public EntityManager managerInstance = manager.criaManager();
     
-    public boolean insereEvento(Evento usuario){
+    public boolean insereEvento(Evento evento){
         boolean inseriu = true;
         try {
             managerInstance.getTransaction().begin();
-            managerInstance.persist(usuario);
+            managerInstance.persist(evento);
             managerInstance.getTransaction().commit();
             manager.fechaConexao(managerInstance);
         } catch (Exception ex){
