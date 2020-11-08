@@ -48,7 +48,7 @@ public class CriaDoacoes extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
 
-            new EnviaEmail(doacoes).doacaoRealizada();
+            /*new EnviaEmail(doacoes).doacaoRealizada();*/
             
             session.setAttribute("status", true);
             request.getRequestDispatcher("/elements.html").forward(request, response);

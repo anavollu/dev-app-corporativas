@@ -7,6 +7,7 @@ import java.security.Security;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -20,9 +21,9 @@ import javax.mail.internet.MimeMessage;
  * @author Felipe Vila Chã
  */
 public class EnviaEmail {
-    private final String remetente = "fagulha.esperanca@gmail.com";
-    private final String senha = "fagulha20!";
-    private final String host = "localhost";
+    @Resource(lookup = "mail/Session")
+    private Session session;
+    
     private Denuncia denuncia = new Denuncia();
     private Doacoes doacoes = new Doacoes();
     
@@ -36,34 +37,19 @@ public class EnviaEmail {
     
     public void denunciaCriada () {
         
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-        properties.setProperty("mail.smtp.port", "587");
-        properties.setProperty("mail.smtp.starttls.enable", "true");
-        properties.setProperty("mail.smtp.quitwait", "false");
-        properties.setProperty("mail.debug", "true");
-        Session email = Session.getInstance(properties, new javax.mail.Authenticator() {
-           @Override
-           protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(remetente, senha);
-           }});
-        
-        email.setDebug(true);
-        
-        try {
-            MimeMessage message = new MimeMessage(email);
-
-            message.setFrom(new InternetAddress(remetente));
+        MimeMessage message = new MimeMessage(session);
+        try {    
+            message.setFrom(new InternetAddress(session.getProperty("mail.from")));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(denuncia.getUsuario().getEmail()));  
             message.setSubject("Denúncia - Fagulha");
             message.setText("Sua denúncia de código " + denuncia.getId() + 
                 " foi realizada com sucesso. Daremos início a investigação e iremos lhe manter informado");
             Transport.send(message);
-            } catch (MessagingException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(EnviaEmail.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
-    
+    /*
     public void denunciaAtualizada () {
         
         Properties properties = System.getProperties();
@@ -135,5 +121,5 @@ public class EnviaEmail {
         } catch (MessagingException ex) {
             Logger.getLogger(EnviaEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
 }

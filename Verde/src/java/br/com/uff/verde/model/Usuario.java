@@ -8,7 +8,6 @@ package br.com.uff.verde.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,8 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -60,6 +57,8 @@ public class Usuario implements Serializable {
     private String email;
     @OneToMany(mappedBy="usuario")
     private List<Denuncia> denuncias;
+    @OneToMany(mappedBy="usuario")
+    private List<Doacoes> doacoes;
 
     public Usuario() {
     }
@@ -140,5 +139,13 @@ public class Usuario implements Serializable {
 
     public void setDenuncias(List<Denuncia> denuncias) {
         this.denuncias = denuncias;
+    }
+
+    public List<Doacoes> getDoacoes() {
+        return doacoes;
+    }
+
+    public void setDoacoes(List<Doacoes> doacoes) {
+        this.doacoes = doacoes;
     }
 }

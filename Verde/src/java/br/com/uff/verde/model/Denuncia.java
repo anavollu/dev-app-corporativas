@@ -23,7 +23,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Denuncia.findAll", query = "SELECT d FROM Denuncia d")
     , @NamedQuery(name = "Denuncia.findByIdDenuncia", query = "SELECT d FROM Denuncia d WHERE d.id = :id")
     , @NamedQuery(name = "Denuncia.findByDescricao", query = "SELECT d FROM Denuncia d WHERE d.descricao = :descricao")
-    , @NamedQuery(name = "Denuncia.findByLocalidade", query = "SELECT d FROM Denuncia d WHERE d.localidade = :localidade")
     , @NamedQuery(name = "Denuncia.findByCdStatus", query = "SELECT d FROM Denuncia d WHERE d.status = :status")
     , @NamedQuery(name = "Denuncia.findByUsuario", query = "SELECT d FROM Denuncia d WHERE d.usuario = :usuario")})
 @XmlRootElement
@@ -36,13 +35,14 @@ public class Denuncia implements Serializable {
     private Integer id;
     @Column(name = "descricao")
     private String descricao;
-    @Column(name = "localidade")
-    private String localidade;
     @Column(name = "cd_status")
     private Integer status;
     @ManyToOne
     @JoinColumn(name="usuario")
     private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name="usuario")
+    private Local local;
 
     public Denuncia() {
     }
@@ -51,9 +51,8 @@ public class Denuncia implements Serializable {
         this.id = idDenuncia;
     }
 
-    public Denuncia(String descricao, String localidade, Usuario usuario) {
+    public Denuncia(String descricao, Usuario usuario) {
         this.descricao = descricao;
-        this.localidade = localidade;
         this.usuario = usuario;
     }
 
@@ -73,14 +72,6 @@ public class Denuncia implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getLocalidade() {
-        return localidade;
-    }
-
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -95,5 +86,13 @@ public class Denuncia implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Local getLocal() {
+        return local;
+    }
+
+    public void setLocal(Local local) {
+        this.local = local;
     }
 }

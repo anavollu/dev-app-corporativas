@@ -43,7 +43,7 @@ public class AtualizaStatusDenuncia extends HttpServlet {
             session.setAttribute("status", false);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
-            new EnviaEmail(denuncia).denunciaAtualizada();
+            /*new EnviaEmail(denuncia).denunciaAtualizada();*/
             
             session.setAttribute("status", true);
             request.getRequestDispatcher("/elements.html").forward(request, response);

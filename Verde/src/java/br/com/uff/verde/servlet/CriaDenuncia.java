@@ -2,7 +2,9 @@ package br.com.uff.verde.servlet;
 
 import br.com.uff.verde.dao.UsuarioDAO;
 import br.com.uff.verde.dao.DenunciaDAO;
+import br.com.uff.verde.dao.LocalDAO;
 import br.com.uff.verde.model.Denuncia;
+import br.com.uff.verde.model.Local;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,10 +28,10 @@ public class CriaDenuncia extends HttpServlet {
         HttpSession session = request.getSession();
         
         Usuario usuario = new UsuarioDAO().getUsuarioById(Integer.parseInt(request.getParameter("id_usuario")));
+        Local local = new LocalDAO().getLocalById(Integer.parseInt(request.getParameter("id_local")));
         String descricao = request.getParameter("descricao");
-        String localidade = request.getParameter("localidade");
         
-        Denuncia denuncia = new Denuncia(descricao, localidade, usuario);
+        Denuncia denuncia = new Denuncia(descricao, usuario);
         
         boolean inseriu = new DenunciaDAO().insereDenuncia(denuncia);
         
