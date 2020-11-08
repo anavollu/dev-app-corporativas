@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.uff.verde.model;
 
 import java.io.Serializable;
@@ -19,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,35 +22,33 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "usuario")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdUser", query = "SELECT u FROM Usuario u WHERE u.id = :id")
-    , @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username")
-    , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
-    , @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
-    , @NamedQuery(name = "Usuario.findByDataNasc", query = "SELECT u FROM Usuario u WHERE u.data_nascimento = :data_nascimento")
-    , @NamedQuery(name = "Usuario.findByRg", query = "SELECT u FROM Usuario u WHERE u.rg = :rg")
-    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "ID_USER")
     private Integer id;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "senha")
-    private String senha;
-    @Column(name = "nome")
-    private String nome;
-    @Column(name = "data_nasc")
-    @Temporal(TemporalType.DATE)
-    private Date data_nascimento;
-    @Column(name = "rg")
-    private String rg;
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "SENHA")
+    private String senha;
+    @Column(name = "NOME")
+    private String nome;
+    @Column(name = "DATA_NASC")
+    @Temporal(TemporalType.DATE)
+    private Date dataNasc;
+    @Column(name = "CIDADE")
+    private String cidade;
+    @Column(name = "ESTADO")
+    private String estado;
+    @Column(name = "PAIS")
+    private String pais;
+    @Column(name = "CPF")
+    private String cpf;
     @OneToMany(mappedBy="usuario")
     private List<Denuncia> denuncias;
     @OneToMany(mappedBy="usuario")
@@ -63,18 +57,20 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Integer id) {
-        this.id = id;
+    public Usuario(Integer idUser) {
+        this.id = idUser;
     }
 
-    public Usuario(Integer idUser, String username, String senha, String nome, Date data_nascimento, String rg, String email) {
+    public Usuario(Integer idUser, String email, String senha, String nome, Date dataNasc, String cidade, String estado, String pais, String cpf) {
         this.id = idUser;
-        this.username = username;
+        this.email = email;
         this.senha = senha;
         this.nome = nome;
-        this.data_nascimento = data_nascimento;
-        this.rg = rg;
-        this.email = email;
+        this.dataNasc = dataNasc;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+        this.cpf = cpf;
     }
 
     public Integer getId() {
@@ -85,12 +81,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -110,27 +106,43 @@ public class Usuario implements Serializable {
     }
 
     public Date getDataNasc() {
-        return data_nascimento;
+        return dataNasc;
     }
 
-    public void setDataNasc(Date data_nascimento) {
-        this.data_nascimento = data_nascimento;
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
-    public String getRg() {
-        return rg;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public List<Denuncia> getDenuncias() {

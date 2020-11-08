@@ -41,7 +41,7 @@ public class Denuncia implements Serializable {
     @JoinColumn(name="usuario")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name="usuario")
+    @JoinColumn(name="local")
     private Local local;
 
     public Denuncia() {

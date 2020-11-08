@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.uff.verde.model;
 
 import java.io.Serializable;
@@ -27,48 +22,45 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "doacoes")
-@NamedQueries({
-    @NamedQuery(name = "Doacoes.findAll", query = "SELECT d FROM Doacoes d")
-    , @NamedQuery(name = "Doacoes.findByIdDoacao", query = "SELECT d FROM Doacoes d WHERE d.idDoacao = :idDoacao")
-    , @NamedQuery(name = "Doacoes.findByValor", query = "SELECT d FROM Doacoes d WHERE d.valor = :valor")
-    , @NamedQuery(name = "Doacoes.findByUsuario", query = "SELECT d FROM Doacoes d WHERE d.usuario = :usuario")
-    , @NamedQuery(name = "Doacoes.findByDataRealizacao", query = "SELECT d FROM Doacoes d WHERE d.dataRealizacao = :dataRealizacao")})
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Doacoes.findAll", query = "SELECT d FROM Doacoes d")})
 public class Doacoes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_doacao")
-    private Integer idDoacao;
-    @Column(name = "valor")
+    @Column(name = "ID_DOACAO")
+    private Integer id;
+    @Column(name = "VALOR")
     private double valor;
-    @ManyToOne
-    @JoinColumn(name="usuario", nullable=false)
-    private Usuario usuario;
     @Column(name = "data_realizacao")
     @Temporal(TemporalType.DATE)
     private Date dataRealizacao;
+    @ManyToOne
+    @JoinColumn(name="usuario", nullable=false)
+    private Usuario usuario;
+    
 
     public Doacoes() {
     }
 
-    public Doacoes(Integer idDoacao) {
-        this.idDoacao = idDoacao;
+    public Doacoes(Integer id) {
+        this.id = id;
     }
 
-    public Doacoes(double valor, Usuario usuario, Date dataRealizacao) {
+    public Doacoes(double valor, Date dataRealizacao, Usuario usuario) {
         this.valor = valor;
-        this.usuario = usuario;
         this.dataRealizacao = dataRealizacao;
+        this.usuario = usuario;
     }
 
-    public Integer getIdDoacao() {
-        return idDoacao;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdDoacao(Integer idDoacao) {
-        this.idDoacao = idDoacao;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public double getValor() {
@@ -79,19 +71,19 @@ public class Doacoes implements Serializable {
         this.valor = valor;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Date getDataRealizacao() {
         return dataRealizacao;
     }
 
     public void setDataRealizacao(Date dataRealizacao) {
         this.dataRealizacao = dataRealizacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
