@@ -61,7 +61,7 @@ public class DoacoesService {
             return Response.status(Response.Status.NOT_FOUND).build();
 
         try{
-            doacoes.setIdDoacao(id);
+            doacoes.setId(id);
             new DoacoesDAO().updateDoacoes(doacoes);
             return Response.status(Response.Status.OK).entity(doacoes).build();
         }

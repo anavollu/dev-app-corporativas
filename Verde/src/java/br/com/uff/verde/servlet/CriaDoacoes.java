@@ -39,7 +39,7 @@ public class CriaDoacoes extends HttpServlet {
             Logger.getLogger(CriaDoacoes.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Doacoes doacoes = new Doacoes(valor, usuario, data);
+        Doacoes doacoes = new Doacoes(valor, data, usuario);
         
         boolean inseriu = new DoacoesDAO().insereDoacoes(doacoes);
         
